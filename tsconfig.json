@@ -111,8 +111,11 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
-    "outDir": "dist"
+    "skipLibCheck": true,                                /* Skip type checking all .d.ts files. */
+    "outDir": "dist",                                    /* Output directory for compiled files */
+    "rootDir": "./src",                                  /* The root directory of your source TypeScript files */
+    "resolveJsonModule": true,                           /* Allows importing JSON files */
+    "moduleResolution": "node"                           /* Ensures proper resolution of modules when using Node.js */
   },
   "include": ["src/controllers", "src/routes", "src/app.ts"],
   "exclude": ["src/data", "node_modules", "dist", "docs", ".github", ".vscode", ".gitignore", ".prettierrc.json", "eslint.config.mjs", "package-lock.json", "package.json", "README.md"]
