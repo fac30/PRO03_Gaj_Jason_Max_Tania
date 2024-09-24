@@ -1,7 +1,7 @@
-/* import express, { Request, Response } from "express"; */
-/* import * as dotenv from "dotenv"; */
-const express = require("express");
-const dotenv = require("dotenv");
+import express, { Request, Response } from "express";
+import * as dotenv from "dotenv";
+/* const express = require("express"); */
+/* const dotenv = require("dotenv"); */
 dotenv.config();
 
 const keys = {
