@@ -1,15 +1,21 @@
-import express, { Express, Request, Response, Router } from "express";
+//h1 IMPORT
 import * as dotenv from "dotenv";
-import * as hub from "./routes/router.js";
+import express, { Express, Request, Response } from "express";
+import { AutoRouter } from "itty-router";
+import { router as childRouter } from "./routes/router.js";
 
+//h1 CONFIG
 dotenv.config();
+const keys = { port: process.env.PORT };
+const app = express();
+const router = AutoRouter();
 
-const keys = { port: process.env.PORT }
-const app: Express = express();
-const router: Router = Router();
+//h1 SERVER
+app.listen(keys.port, () => { console.log(`Port ${keys.port}`) });
 
-app.use(hub);
+router
+  .all("/go/*", childRouter.fetch)
+  .get('/', () => "Router Path: './app'");
 
-app.listen(keys.port, () => {
-  console.log(`Server running on port ${keys.port}`);
-});
+//h1 EXPORT
+export default router;
