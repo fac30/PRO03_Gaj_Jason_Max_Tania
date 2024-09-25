@@ -31,6 +31,7 @@
     "typescript-eslint": "^8.6.0"
   },
   "dependencies": {
+    "@spotify/web-api-ts-sdk": "^1.2.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "openai": "^4.63.0",
