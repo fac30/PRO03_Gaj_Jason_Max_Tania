@@ -11,17 +11,19 @@ const router: Router = Router();
 console.log(`Now in ./src/routes/router.ts`);
 
 //h1 Routers
-app.get('/openai', (req: Request, res: Response) => {
+router.get('/openai', (req: Request, res: Response) => {
   res.send({ message: "Server --> OpenAI" });
 });
 
-app.get('/spotify', (req: Request, res: Response) => {
+router.get('/spotify', (req: Request, res: Response) => {
   res.send({ message: "Server --> Spotify" });
 });
 
 //h2 Server
-app.get('/', (req: Request, res: Response) => {
+router.get('/', (req: Request, res: Response) => {
   res.send({ message: "Server --> Server" });
 });
 
 //h2 Fallbacks
+
+export
