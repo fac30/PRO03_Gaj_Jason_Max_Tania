@@ -7,3 +7,5 @@ type track = {
 };
 
 type spotifyResponse = track[];
+
+export { spotifyResponse };
