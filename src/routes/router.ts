@@ -1,17 +1,19 @@
 //h1 IMPORT
-import { AutoRouter } from "itty-router";
+import { AutoRouter, html, IRequest, json, text } from "itty-router";
 
 //h1 ROUTES
-export const router = AutoRouter({ base: "/go" });
+const router = AutoRouter({ base: "/go" });
 
-router.get("/", () => "Router Path: ./routes/router");
+router.get("/openai", ( req: IRequest ) => {
+    console.log("Router Path: ./routes/router:openai");
+});
 
-/* router.get('/openai', (req: Request, res: Response) => {
-    res.send({ message: "Server --> OpenAI" });
+router.get("/spotify", ( req: IRequest ) => {
+    console.log("Router Path: ./routes/router:spotify");
 });
-router.get('/spotify', (req: Request, res: Response) => {
-    res.send({ message: "Server --> Spotify" });
+
+router.get("/", ( req: IRequest ) => {
+    console.log("Router Path: ./routes/router:server");
 });
-router.get('/', (req: Request, res: Response) => {
-    res.send({ message: "Server --> Server" });
-}); */
+
+export { router };
