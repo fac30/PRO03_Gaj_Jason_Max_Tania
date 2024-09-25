@@ -9,7 +9,7 @@
     "dtslint": "dtslint types",
     "compile": "npx tsc",
     "server": "node dist/app.js",
-    "dev": "nodemon src/app.ts"
+    "dev": "nodemon"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.6.0"
   },
