@@ -11,10 +11,8 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "rootDir": "./src",
-    "resolveJsonModule": true,
-    "noEmit": true,
-    "allowImportingTsExtensions": true
+    "resolveJsonModule": true
   },
-  "include": ["src/*.ts"],
-  "exclude": ["src/data", "node_modules", "dist", "docs", ".github", ".vscode", ".gitignore", ".prettierrc.json", "eslint.config.mjs", "package-lock.json", "package.json", "README.md"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "docs", ".github", ".vscode", ".gitignore", ".prettierrc.json", "eslint.config.mjs", "package-lock.json", "package.json", "README.md"]
 }

@@ -1,4 +1,4 @@
-import { openaiResponse } from "./openaiResponse.ts";
+import { openaiResponse } from "./openaiResponse.js";
 
 interface spotifyQuery extends openaiResponse {
     date: Date

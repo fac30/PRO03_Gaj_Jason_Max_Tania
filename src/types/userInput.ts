@@ -1,4 +1,4 @@
-import { openaiQuery } from "./openaiQuery.ts"
+import { openaiQuery } from "./openaiQuery.js"
 
 interface userInput extends openaiQuery {
     date: Date
