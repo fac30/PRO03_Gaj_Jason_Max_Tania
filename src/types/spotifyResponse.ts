@@ -1,4 +1,4 @@
-type track = {
+interface track {
     title: string,
     artist: string,
     album: string,
