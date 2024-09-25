@@ -1,4 +1,4 @@
-type openaiResponse = {
+interface openaiResponse {
     mood: string,
     genre: string
 };
