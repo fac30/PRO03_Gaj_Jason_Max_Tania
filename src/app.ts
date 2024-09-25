@@ -7,6 +7,8 @@ const keys = { port: process.env.PORT }
 const app: Express = express();
 
 //h1 Routers
+console.log(`Now in ./app`);
+
 app.get('/openai', (req: Request, res: Response) => {
   res.send({ message: "Server --> OpenAI" });
 });
