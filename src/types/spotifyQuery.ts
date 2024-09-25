@@ -1,6 +1,6 @@
 import { openaiResponse } from "./openaiResponse.js";
 
-interface spotifyFeatures {
+export interface spotifyFeatures {
     valence: number, 
     energy: number,
     danceability: number,
@@ -8,7 +8,7 @@ interface spotifyFeatures {
     tempo: number
 }
 
-interface spotifyQuery extends openaiResponse {
+export interface spotifyQuery extends openaiResponse {
     date: Date,
     spotifyFeatures: spotifyFeatures
 };
@@ -28,5 +28,3 @@ const query: spotifyQuery = {
     }
 }; 
 */
-
-export { spotifyQuery };
