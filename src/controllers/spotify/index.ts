@@ -3,33 +3,36 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-//access the client id and sectret on the .env ignore file
+// Access the client ID and secret from the .env file
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
-// this allows access without needing user permission. 
+// Initialize the Spotify SDK using client credentials
 const sdk = SpotifyApi.withClientCredentials(clientId, clientSecret);
 console.log('Client ID:', clientId);
-console.log('Client Secret:', clientSecret);
 
-//an async function which right now is filling the node console with artist: name, followers, popularity. using spotifyClientCredentials.
-async function searchArtist() {
+// Define an async function to search tracks based on genre
+async function searchGenre(genre: string) {
     try {
-        console.log("Searching Spotify for The Beatles...");
-        
-    //here i'll create 
-        const items = await sdk.search("Astroworld", ["album"]);
-        console.log("Searching:", items.albums.items[0]);
+        console.log(`Searching for tracks in the genre: ${genre}`);
 
-        // // Printing the albums along with their popularity   
-        // console.table(items.albums.items.map((item) => ({
-        //     name: item.name,
-        //     popularity: item.popularity,
-        // })));
+        // Search for tracks by genre
+        const searchResults = await sdk.search(`genre:${genre}`, ['track']);
+
+        // Check if any tracks are found
+        if (searchResults.tracks && searchResults.tracks.items.length > 0) {
+            searchResults.tracks.items.forEach((track, index) => {
+                console.log(`${index + 1}. ${track.name} by ${track.artists[0].name}`);
+            });
+        } else {
+            console.log(`No tracks found for the genre: ${genre}`);
+        }
+
+        return searchResults.tracks?.items;
     } catch (error) {
-        console.error("Error searching for artist:", error);
+        console.error('Error fetching tracks by genre:', error);
     }
 }
 
-// Call the function
-searchArtist();
+// Call the function with a specific genre (e.g., jazz)
+searchGenre('hiphop')
