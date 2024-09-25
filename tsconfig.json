@@ -5,7 +5,6 @@
     "moduleResolution": "NodeNext",
     // "allowJs": true,
     // "checkJs": true,
-    // "outDir": "./",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
