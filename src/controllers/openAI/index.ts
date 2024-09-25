@@ -16,7 +16,7 @@ async function extractEmotionFromText(userInput: string): Promise<string> {
         model: 'gpt-4',
         messages: [
           { role: 'user', content: userInput },
-          { role: 'system', content: 'Please extract the mood or emotions from the above text.' },
+          { role: 'system', content: 'Please extract the mood or emotions from the above text. It should be 3-5 emotions. Create an array with this emotions.' },
         ],
       });
   
@@ -34,4 +34,6 @@ async function extractEmotionFromText(userInput: string): Promise<string> {
   const userInput = "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer. The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep;";
   extractEmotionFromText(userInput).then(emotion => {
     console.log(`Extracted Emotion: ${emotion}`);
-  });
+  })
+ 
+
