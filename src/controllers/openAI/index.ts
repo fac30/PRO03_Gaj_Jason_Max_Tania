@@ -1,6 +1,9 @@
 import OpenAI from "openai";
 import dotenv from 'dotenv';
 import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' assert { type: 'json' };
+import { openaiQuery } from "../../types/openaiQuery.js";
+import { openaiResponse } from "../../types/openaiResponse.js";
+
 
 dotenv.config();
 
@@ -9,14 +12,20 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+//example 
+const userInput: openaiQuery = {
+  eventDescription: "I feel amazing and happy today, filled with excitement!",
+  musicGenre: "pop"
+}
+
 //function to extract emotions from text
-async function extractEmotionFromText(userInput: string): Promise<string[]> {
+async function extractEmotionFromText(query: openaiQuery): Promise<string[]> {
     try {
       // Call the OpenAI Chat Completion API
       const response = await openai.chat.completions.create({
-        model: 'gpt-4',
+        model: 'gpt-4o',
         messages: [
-          { role: 'user', content: userInput },
+          { role: 'user', content: query.eventDescription },
           { role: 'system', content: 'Please extract the mood or emotions from the above text. It should be 3-5 emotions as an array of strings, and the output should be a valid JSON array. Do not format it in code blocks or include any extra characters.' },
         ],
       });
@@ -52,8 +61,8 @@ const cosineSimilarity = (vecA: number[], vecB: number[]): number => {
     return dotProduct / (magnitudeA * magnitudeB);
   };
   
-  // Function to get embeddings for any given text using OpenAI's embeddings API
-  async function getEmbeddingForText(text: string): Promise<number[]> {
+// Function to get embeddings for any given text using OpenAI's embeddings API
+async function getEmbeddingForText(text: string): Promise<number[]> {
     const response = await openai.embeddings.create({
       model: 'text-embedding-ada-002',
       input: text
@@ -62,8 +71,8 @@ const cosineSimilarity = (vecA: number[], vecB: number[]): number => {
     return response.data[0].embedding;
   }
   
-  // Function to find the closest matching emotion using embeddings and cosine similarity
-  async function findClosestEmotionUsingEmbeddings(extractedEmotion: string): Promise<any> {
+// Function to find the closest matching emotion using embeddings and cosine similarity
+async function findClosestEmotionUsingEmbeddings(extractedEmotion: string): Promise<any> {
     // Get the embedding for the extracted emotion
     const extractedEmotionEmbedding = await getEmbeddingForText(extractedEmotion);
   
@@ -88,24 +97,37 @@ const cosineSimilarity = (vecA: number[], vecB: number[]): number => {
       }
     }
   
-    // Return closest emotion or default message if no match
     return closestEmotion; // || { message: 'No close emotion found' };
   }
+
+
+  // Function to transform the object
+function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResponse {
+  return {
+    "mood": emotionObj.name,  // Use 'name' as 'mood'
+    "genre": query.musicGenre,  // Take 'genre' from the input query
+    "spotifyFeatures": emotionObj.spotify_features
+  };
+}
+
   
 
 // Main function to process everything
 (async () => {
-    const userInput = "I feel amazing and happy today, filled with excitement!";
+    //const userInput = "I feel amazing and happy today, filled with excitement!";
   
     try {
       const extractedEmotions = await extractEmotionFromText(userInput);
-      console.log(`Extracted Emotions: ${extractedEmotions}`);
+      //console.log(`Extracted Emotions: ${extractedEmotions}`);
   
       const chosenEmotion = getRandomEmotion(extractedEmotions);
-      console.log(`Randomly Chosen Emotion: ${chosenEmotion}`);
+      //console.log(`Randomly Chosen Emotion: ${chosenEmotion}`);
   
       const closestEmotion = await findClosestEmotionUsingEmbeddings(chosenEmotion);
-      console.log('Closest Emotion Match:', JSON.stringify(closestEmotion, null, 2));
+      //console.log('Closest Emotion Match:', JSON.stringify(closestEmotion, null, 2));
+
+      const transformedObject = transformEmotionObject(closestEmotion, userInput);
+      console.log(transformedObject);
   
     } catch (error) {
       console.error('Error:', error);
