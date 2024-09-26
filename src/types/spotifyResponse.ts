@@ -1,4 +1,4 @@
-interface track {
+export interface track {
     title: string,
     artist: string,
     album: string,
@@ -6,6 +6,4 @@ interface track {
     duration: number
 };
 
-type spotifyResponse = track[];
-
-export { spotifyResponse };
+export type spotifyResponse = track[];

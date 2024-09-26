@@ -1,10 +1,14 @@
-import express, { Express, Request, Response } from "express";
-import * as dotenv from "dotenv";
+import express, { Express, Request, Response } from 'express';
+import * as dotenv from 'dotenv';
+import swaggerDocs from './swagger.js';
 
 dotenv.config();
 
-const keys = { port: process.env.PORT }
+const keys = { port: process.env.PORT };
 const app: Express = express();
+
+// Initialize Swagger
+swaggerDocs(app);
 
 //h1 Routers
 console.log(`Now in ./app`);
