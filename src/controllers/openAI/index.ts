@@ -101,11 +101,11 @@ async function findClosestEmotionUsingEmbeddings(extractedEmotion: string): Prom
   }
 
 
-  // Function to transform the object
+// Function to transform the object
 function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResponse {
   return {
-    mood: emotionObj.name,  // Use 'name' as 'mood'
-    genre: query.musicGenre,  // Take 'genre' from the input query
+    mood: emotionObj.name,
+    genre: query.musicGenre, 
     spotifyFeatures: emotionObj.spotify_features
   };
 }
@@ -114,7 +114,6 @@ function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResp
 
 // Main function to process everything
 (async () => {
-    //const userInput = "I feel amazing and happy today, filled with excitement!";
   
     try {
       const extractedEmotions = await extractEmotionFromText(userInput);
