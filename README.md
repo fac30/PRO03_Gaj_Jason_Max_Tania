@@ -236,7 +236,7 @@ export type SpotifyResponse = Track[];
 4. **Compile TypeScript**
 
    ```bash
-   tsc
+   npm run compile
    ```
 
 ## Running the Project
@@ -244,7 +244,7 @@ export type SpotifyResponse = Track[];
 Start the server by running:
 
 ```bash
-npm start
+npm run server
 ```
 
 The API will be available at `http://localhost:3000`.
