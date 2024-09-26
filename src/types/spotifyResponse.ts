@@ -1,11 +1,9 @@
-interface track {
+export interface track {
     title: string,
     artist: string,
     album: string,
-    realeaseDate: Date,
+    releaseDate: Date,
     duration: number
 };
 
-type spotifyResponse = track[];
-
-export { spotifyResponse };
+export type spotifyResponse = track[];
