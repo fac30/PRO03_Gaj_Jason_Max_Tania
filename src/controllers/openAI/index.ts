@@ -104,9 +104,9 @@ async function findClosestEmotionUsingEmbeddings(extractedEmotion: string): Prom
   // Function to transform the object
 function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResponse {
   return {
-    "mood": emotionObj.name,  // Use 'name' as 'mood'
-    "genre": query.musicGenre,  // Take 'genre' from the input query
-    "spotifyFeatures": emotionObj.spotify_features
+    mood: emotionObj.name,  // Use 'name' as 'mood'
+    genre: query.musicGenre,  // Take 'genre' from the input query
+    spotifyFeatures: emotionObj.spotify_features
   };
 }
 
