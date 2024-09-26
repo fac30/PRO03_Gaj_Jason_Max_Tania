@@ -1,6 +1,6 @@
-import { Router, Request, Response } from 'express';
-
-const router = Router();
+import express, { Router, Request, Response } from 'express';
+import { searchGenre as generatePlaylist } from '../spotify/searchGenre.js';
+const router = express.Router();
 
 /**
  * @openapi
@@ -24,18 +24,13 @@ const router = Router();
  *       '400':
  *         description: Invalid input
  */
-router.post('/playlist', async (req: Request, res: Response) => {
-  // Your implementation to handle the request
-  // Use your controllers to interact with OpenAI and Spotify APIs
-  try {
-    const userInput = req.body;
-    // Validate userInput based on your interface definitions
-    // Call your controller function
+
+function userOutput () {}
+
+router.get('/playlist', async (req: Request, res: Response) => {
+  const userInput = req.body;
     const playlist = await generatePlaylist(userInput);
     res.status(200).json(playlist);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
 });
 
-export default router;
+export { userOutput };

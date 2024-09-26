@@ -12,7 +12,7 @@ const sdk = SpotifyApi.withClientCredentials(clientId, clientSecret);
 console.log('Client ID:', clientId);
 
 // Define an async function to search tracks based on genre
-async function searchGenre(genre: string) {
+export async function searchGenre(genre: string) {
     try {
         console.log(`Searching for tracks in the genre: ${genre}`);
 

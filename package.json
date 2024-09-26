@@ -38,6 +38,7 @@
     "express": "^4.21.0",
     "itty-router": "^5.0.18",
     "openai": "^4.63.0",
+    "prompt-sync": "^4.2.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "tsx": "^4.19.1"

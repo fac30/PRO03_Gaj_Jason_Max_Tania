@@ -3,12 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Initialize OpenAI with your API key from the environment variables
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// Function to extract emotions from user input
 async function extractEmotionFromText(userInput: string): Promise<string> {
     try {
       // Call the OpenAI Chat Completion API
@@ -31,7 +27,15 @@ async function extractEmotionFromText(userInput: string): Promise<string> {
   }
   
   // Example usage:
-  const userInput = "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer. The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep;";
-  extractEmotionFromText(userInput).then(emotion => {
-    console.log(`Extracted Emotion: ${emotion}`);
-  });
+const demo = {
+  userInput: `To be, or not to be, that is the question:
+    Whether 'tis nobler in the mind to suffer the slings and arrows of outrageous fortune,
+    Or to take Arms against a Sea of troubles,
+    And by opposing end them: to die, to sleep
+  `
+};
+
+/* extractEmotionFromText(demo.userInput)
+  .then(emotion => { console.log(`Extracted Emotion: ${emotion}`)}); */
+
+export { extractEmotionFromText }
