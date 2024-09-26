@@ -34,6 +34,9 @@ const options = {
           properties: {
             mood: { type: 'string', description: 'OpenAI inferred mood based on user input.' },
             genre: { type: 'string', description: 'Preferred music genre.' },
+            spotifyFeatures: {
+              $ref: '#/components/schemas/SpotifyFeatures',
+            },
           },
           required: ['mood', 'genre'],
         },
@@ -103,10 +106,37 @@ const options = {
       },
     },
     paths: {
+      '/playlist': {
+        get: {
+          tags: ['Endpoint'],
+          summary: 'Ask user for an event date, description and music genre and send back a playlist.',
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/UserInput' },
+              },
+            },
+          },
+          responses: {
+            '200': {
+              description: 'Generated playlist based on user input.',
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/SpotifyResponse' },
+                },
+              },
+            },
+            '400': {
+              description: 'Invalid input.',
+            },
+          },
+        },
+      },
       '/openai': {
-        post: {
-          tags: ['Endpoints'],
-          summary: 'Process user input and return inferred mood from OpenAI',
+        get: {
+          tags: ['Dev Endpoints'],
+          summary: 'Get the inferred mood and spotify feature metric settings extracted from event description by OpenAI',
           requestBody: {
             required: true,
             content: {
@@ -117,24 +147,7 @@ const options = {
           },
           responses: {
             '200': {
-              description: 'OpenAI inferred mood based on user input.',
-              content: {
-                'application/json': {
-                  schema: { $ref: '#/components/schemas/OpenAIResponse' },
-                },
-              },
-            },
-            '400': {
-              description: 'Invalid input.',
-            },
-          },
-        },
-        get: {
-          tags: ['Endpoints'],
-          summary: 'Get the latest mood extracted by OpenAI',
-          responses: {
-            '200': {
-              description: 'Latest inferred mood and genre.',
+              description: 'Return mood and spotify feature metric settings.',
               content: {
                 'application/json': {
                   schema: { $ref: '#/components/schemas/OpenAIResponse' },
@@ -149,36 +162,8 @@ const options = {
       },
       '/spotify': {
         get: {
-          tags: ['Endpoints'],
-          summary: 'Search for tracks based on a predefined genre',
-          parameters: [
-            {
-              name: 'genre',
-              in: 'query',
-              required: true,
-              schema: { type: 'string' },
-              description: 'Music genre to search for tracks.',
-            },
-          ],
-          responses: {
-            '200': {
-              description: 'List of tracks returned from Spotify API.',
-              content: {
-                'application/json': {
-                  schema: { $ref: '#/components/schemas/SpotifyResponse' },
-                },
-              },
-            },
-            '400': {
-              description: 'Invalid input.',
-            },
-          },
-        },
-      },
-      '/playlist': {
-        post: {
-          tags: ['Endpoints'],
-          summary: 'Generate a playlist based on user input',
+          tags: ['Dev Endpoints'],
+          summary: 'Search for tracks and return a playlist based on a predefined genre, date and spotify feature metric settings.',
           requestBody: {
             required: true,
             content: {
@@ -189,15 +174,15 @@ const options = {
           },
           responses: {
             '200': {
-              description: 'Generated playlist based on input.',
+              description: 'Return a playlist to be delivered to the user.',
               content: {
                 'application/json': {
                   schema: { $ref: '#/components/schemas/SpotifyResponse' },
                 },
               },
             },
-            '400': {
-              description: 'Invalid input.',
+            '404': {
+              description: 'No songs found.',
             },
           },
         },
