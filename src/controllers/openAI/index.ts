@@ -42,16 +42,13 @@ async function extractEmotionFromText(query: openaiQuery): Promise<string[]> {
       console.error('Error extracting emotions:', error);
       throw error;
     }
-  }
-  
-  
+  } 
 
 // Function to randomly choose one emotion from the list of extracted emotions
 function getRandomEmotion(emotions: string[]): string {
     const randomIndex = Math.floor(Math.random() * emotions.length);
     return emotions[randomIndex];
   }
-
 
 // Function to compute cosine similarity between two embedding vectors
 const cosineSimilarity = (vecA: number[], vecB: number[]): number => {
@@ -67,7 +64,7 @@ async function getEmbeddingForText(text: string): Promise<number[]> {
       model: 'text-embedding-ada-002',
       input: text
     });
-    //console.log(`Embedding for "${text}":`, response.data[0].embedding);  // Debugging embedding generation
+    // console.log(`Embedding for "${text}":`, response.data[0].embedding);  // Debugging embedding generation
     return response.data[0].embedding;
   }
   
@@ -99,7 +96,6 @@ async function findClosestEmotionUsingEmbeddings(extractedEmotion: string): Prom
   
     return closestEmotion; // || { message: 'No close emotion found' };
   }
-
 
 // Function to transform the object
 function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResponse {
