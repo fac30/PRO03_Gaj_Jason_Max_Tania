@@ -5,11 +5,10 @@
   "description": "A thing that will, at some point, do a thing.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dtslint": "dtslint types",
     "compile": "npx tsc",
     "server": "node dist/app.js",
-    "dev": "nodemon"
+    "dev": "nodemon --exec tsx src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +19,8 @@
     "@tsconfig/node20": "^20.1.4",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^4.17.21",
-    "@types/node": "^22.5.5",
+    "@types/node": "^22.7.4",
+    "@types/prompt-sync": "^4.2.3",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "eslint": "^9.11.0",
@@ -29,6 +29,7 @@
     "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.1",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.6.0"
   },
@@ -40,7 +41,6 @@
     "openai": "^4.63.0",
     "prompt-sync": "^4.2.0",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1",
-    "tsx": "^4.19.1"
+    "swagger-ui-express": "^5.0.1"
   }
 }

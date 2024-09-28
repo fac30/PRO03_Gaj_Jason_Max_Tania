@@ -1,5 +1,5 @@
 import promptSync from 'prompt-sync';
-import { userInput } from "../../types/userInput.js";
+import { userInput } from "../types/userInput.js";
 const prompt = promptSync();
 
 async function userInput() {
@@ -17,9 +17,9 @@ async function userInput() {
         date: new Date()
     };
     
-    userInput.date.setFullYear(await prompt(`Type a 4 digit year`))
-    userInput.date.setMonth(await prompt(`Type a 2 digit month`));
-    userInput.date.setDate(await prompt(`Type a 2 digit day`));
+    userInput.date.setFullYear(parseInt(await prompt(`Type a 4 digit year`), 10));
+    userInput.date.setMonth(parseInt(await prompt(`Type a 2 digit month`), 10));
+    userInput.date.setDate(parseInt(await prompt(`Type a 2 digit day`), 10));
 
     return userInput;
 }
