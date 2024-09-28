@@ -21,33 +21,19 @@ app.use('/api', hub);
 
 //h2 Endpoints
 app.get('/', (req: Request, res: Response) => {
-	res.json({
-			message: "Welcome to the API",
-			endpoints: [
-					{
-							path: "/api",
-							description: "API root",
-							subRoutes: [
-									{
-											path: "/openAI",
-											description: "OpenAI-related endpoints"
-									},
-									{
-											path: "/spotify",
-											description: "Spotify-related endpoints"
-									},
-									{
-											path: "/user",
-											description: "User-related endpoints"
-									},
-									{
-											path: "/transfer",
-											description: "Transfer-related endpoints"
-									}
-							]
-					}
-			]
-	});
+	res.send(`
+		<h1>MoodTime</h1>
+		<h2>Available Endpoints:</h2>
+		<ul>
+			<li><a href="/api">/api</a> - API root</li>
+			<ul>
+				<li><a href="/api/openAI">/api/openAI</a> - OpenAI-related endpoints</li>
+				<li><a href="/api/spotify">/api/spotify</a> - Spotify-related endpoints</li>
+				<li><a href="/api/user">/api/user</a> - User-related endpoints</li>
+				<li><a href="/api/transfer">/api/transfer</a> - Transfer-related endpoints</li>
+			</ul>
+		</ul>
+	`);
 });
 
 //h1 EXPORT

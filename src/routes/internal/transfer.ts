@@ -4,9 +4,9 @@ import { Request, Response, Router } from "express";
 const router = Router();
 
 //h1 ACTIVE
-router.get('/test', (req: Request, res: Response) => {
+router.get('/', (req: Request, res: Response) => {
 	res.json([
-			{ route: "/api/transfer/test", purpose: "transfer Router" }
+			{ route: "/api/transfer/", purpose: "transfer Router" }
 	])
 })
 

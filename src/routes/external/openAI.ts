@@ -5,9 +5,9 @@ import { Request, Response, Router } from "express";
 
 const router = Router();
 
-router.get("/test", (req: Request, res: Response) => {
+router.get("/", (req: Request, res: Response) => {
   res.json(
-    { route: "/api/openAI/test", message: "openAI Router" }
+    { route: "/api/openAI/", message: "openAI Router" }
   );
 });
 

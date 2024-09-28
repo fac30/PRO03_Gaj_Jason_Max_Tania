@@ -5,9 +5,9 @@ import { Request, Response, Router } from "express";
 
 const router = Router();
 
-router.get("/test", (req: Request, res: Response) => {
+router.get("/", (req: Request, res: Response) => {
   res.json(
-		{ route: "/api/spotify/test", message: "Spotify Router" }
+		{ route: "/api/spotify/", message: "Spotify Router" }
 	);
 });
 

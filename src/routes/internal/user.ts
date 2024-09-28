@@ -5,9 +5,9 @@ import { Request, Response, Router } from "express";
 const router = Router();
 
 //h1 ACTIVE
-router.get("/test", (req: Request, res: Response) => {
+router.get("/", (req: Request, res: Response) => {
   res.json(
-    { route: "/api/user/test", message: "User Router" }
+    { route: "/api/user/", message: "User Router" }
   );
 });
 
