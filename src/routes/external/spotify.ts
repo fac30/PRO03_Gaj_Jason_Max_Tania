@@ -4,7 +4,7 @@ import express, { Request, Response, Router } from "express";
 const app = express();
 const router = express.Router();
 
-import { searchGenre } from "../../models/spotify/searchGenre.js";
+import { searchGenre } from "../../controllers/spotify/searchGenre.js";
 import { userInput } from "../../controllers/internal/getInput.js";
 
 app.get("/spotify/searchGenre", async (req: Request, res: Response) => {

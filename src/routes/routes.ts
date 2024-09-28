@@ -16,5 +16,15 @@ app.use(spotify);
 app.use(user);
 app.use(transfer);
 
+app.get('/routes', (req: Request, res: Response) => {
+    res.json([
+        {
+            route: "/routes/",
+            path: "./routes/routes",
+            purpose: "test router"
+        }
+    ])
+});
+
 //h1 EXPORT
 export { router };

@@ -35,4 +35,4 @@ export async function searchGenre(genre: string) {
 }
 
 // Call the function with a specific genre (e.g., jazz)
-searchGenre('rock');
+// searchGenre('rock');
