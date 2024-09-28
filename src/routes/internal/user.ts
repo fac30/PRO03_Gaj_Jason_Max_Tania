@@ -1,23 +1,19 @@
 //h1 IMPORT
-import express, { Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
+// import { userInput } from "../../controllers/internal/getInput.js";
 
-import { userInput } from "../../controllers/internal/getInput.js";
-
-const app = express();
-const router = express.Router();
+const router = Router();
 
 //h1 ACTIVE
-app.get('/internal/user/input', (req: Request, res: Response) => {
-    res.json([
-        { route: "/internal/user/input", purpose: "get input from user" }
-    ])
+router.get("/test", (req: Request, res: Response) => {
+  res.json(
+    { route: "/api/user/test", message: "User Router" }
+  );
 });
 
-app.get('/internal/user/output', (req: Request, res: Response) => {
-    res.json([
-        { route: "/internal/user/output", purpose: "display output to user" }
-    ])
-});
+/* router.get('/input', (req: Request, res: Response) => {}); */
+
+/* router.get('/output', (req: Request, res: Response) => {}); */
 
 //h1 EXPORT
 export { router };

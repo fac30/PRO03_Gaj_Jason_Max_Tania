@@ -1,14 +1,13 @@
 //h1 IMPORT
-import express, { Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
 
-const app = express();
-const router = express.Router();
+const router = Router();
 
 //h1 ACTIVE
-app.get('/internal/transfer', (req: Request, res: Response) => {
-    res.json([
-        { route: "/internal/transfer", purpose: "send to Spotify" }
-    ])
+router.get('/test', (req: Request, res: Response) => {
+	res.json([
+			{ route: "/api/transfer/test", purpose: "transfer Router" }
+	])
 })
 
 //h1 EXPORT

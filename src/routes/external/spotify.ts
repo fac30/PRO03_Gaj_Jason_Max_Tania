@@ -1,18 +1,19 @@
 //h1 IMPORT
-import express, { Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
+// import { searchGenre } from "../../controllers/spotify/searchGenre.js";
+// import { userInput } from "../../controllers/internal/getInput.js";
 
-const app = express();
-const router = express.Router();
+const router = Router();
 
-import { searchGenre } from "../../controllers/spotify/searchGenre.js";
-import { userInput } from "../../controllers/internal/getInput.js";
-
-app.get("/spotify/searchGenre", async (req: Request, res: Response) => {
+router.get("/test", (req: Request, res: Response) => {
   res.json(
-    { route: "searchGenre", purpose: "useOpenAI & Date to retrieve playlist" }
-  );
-  // const input = await userInput();
-  // const output = await searchGenre(input.musicGenre);
+		{ route: "/api/spotify/test", message: "Spotify Router" }
+	);
 });
+
+/* router.get("/searchGenre", async (req: Request, res: Response) => {
+  const input = await userInput();
+  const output = await searchGenre(input.musicGenre);
+}); */
 
 export { router };
