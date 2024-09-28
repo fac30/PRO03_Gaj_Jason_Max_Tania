@@ -16,16 +16,17 @@
 
     subgraph tanya
         toOpenAI
-        openai
         fromOpenAI
     end
+    
+    openai
 
     subgraph gaj
         toSpotify
-        spotify
         fromSpotify
     end
 
+    spotify
 
     input --> inSEvent & inSGenre & inDDate
     inSEvent & inSGenre --> toOpenAI

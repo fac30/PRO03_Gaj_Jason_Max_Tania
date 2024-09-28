@@ -1,40 +1,24 @@
 # Routes Scratchpad
 
 ```mermaid
-    graph TD
-
-    input
-    output
-    
-    subgraph jason
-        inSEvent
-        inSGenre
-        inDDate
-        appApp
-        appOut
-    end
-
-    subgraph tanya
-        toOpenAI
-        openai
-        fromOpenAI
-    end
-
-    subgraph gaj
-        toSpotify
-        spotify
-        fromSpotify
-    end
-
-
+    graph LR
     input --> inSEvent & inSGenre & inDDate
-    inSEvent & inSGenre --> toOpenAI
-    toOpenAI --> openai
-    openai --> fromOpenAI
-    inDDate & fromOpenAI --> appApp
-    appApp --> toSpotify
-    toSpotify --> spotify
-    spotify --> fromSpotify
-    fromSpotify --> appOut
-    appOut --> output
+    output
+    subgraph jason
+        inSEvent --> toOpenAI
+        inSGenre --> toOpenAI
+        inDDate --> appApp
+        appApp --> toSpotify
+        appOut --> output
+    end
+    subgraph tanya
+        toOpenAI --> openai
+        openai --> fromOpenAI
+        fromOpenAI --> appApp
+    end
+    subgraph gaj
+        toSpotify --> spotify
+        spotify --> fromSpotify
+        fromSpotify --> appOut
+    end
 ```

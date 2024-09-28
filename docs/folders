@@ -1,0 +1,34 @@
+src
+├── app.ts
+├── controllers
+│   ├── openAI
+│   │   └── extractEmotion.ts
+│   ├── spotify
+│   │   └── searchGenre.ts
+│   └── user
+│       ├── getInput.ts
+│       └── showOutput.ts
+├── data
+│   ├── demo
+│   │   └── album.json
+│   └── schema
+│       └── categories.json
+├── models
+│   ├── openai
+│   └── spotify
+│       └── searchGenre.ts
+├── routes
+│   ├── internal
+│   │   └── user.ts
+│   ├── openAI
+│   │   └── index.ts
+│   ├── routes.ts
+│   └── spotify
+│       └── index.ts
+├── swagger.ts
+└── types
+    ├── openaiQuery.ts
+    ├── openaiResponse.ts
+    ├── spotifyQuery.ts
+    ├── spotifyResponse.ts
+    └── userInput.ts
