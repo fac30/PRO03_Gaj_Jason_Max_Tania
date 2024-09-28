@@ -1,16 +1,20 @@
 //h1 IMPORT
 import express, { Request, Response, Router } from "express";
 
-import { router as openAI } from "./openAI/index.js";
-import { router as spotify } from "./spotify/index.js";
-import { router as user } from "./internal/user.js";
-
 const app = express();
 const router = express.Router();
 
+import { router as dev } from "./internal/dev.js";
+import { router as transfer } from "./internal/transfer.js";
+import { router as user } from "./internal/user.js";
+import { router as openAI } from "./external/openAI.js";
+import { router as spotify } from "./external/spotify.js";
+
+app.use(dev);
 app.use(openAI);
 app.use(spotify);
 app.use(user);
+app.use(transfer);
 
 //h1 EXPORT
 export { router };

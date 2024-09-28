@@ -12,7 +12,7 @@ const router = express.Router();
 swaggerDocs(app);
 
 //h1 ACTIVE
-app.listen(keys.port, () => { console.log(`Port ${keys.port}`) });
+app.listen(keys.port, () => { console.log(`Server Listening on Port ${keys.port}`) });
 
 //h2 Routers
 app.use(routes);
