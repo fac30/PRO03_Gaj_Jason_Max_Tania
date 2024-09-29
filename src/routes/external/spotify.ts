@@ -1,7 +1,6 @@
 //h1 IMPORT
-import { Request, Response, Router } from "express";
-// import { searchGenre } from "../../controllers/spotify/searchGenre.js";
-// import { userInput } from "../../controllers/internal/getInput.js";
+import { Router, Request, Response } from 'express';
+import { generatePlaylist, query } from '../../controllers/spotify/searchGenre.js';
 
 const router = Router();
 
@@ -11,9 +10,9 @@ router.get("/", (req: Request, res: Response) => {
 	);
 });
 
-/* router.get("/searchGenre", async (req: Request, res: Response) => {
-  const input = await userInput();
-  const output = await searchGenre(input.musicGenre);
-}); */
+router.get('/playlist', async (req: Request, res: Response) => {
+  const playlist = await generatePlaylist(query);
+	res.status(200).json(playlist);
+});
 
 export { router };

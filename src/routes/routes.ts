@@ -15,7 +15,26 @@ router.use('/transfer', transfer);
 
 //h2 Routes
 router.get('/', (req: Request, res: Response) => {
-	res.json({ route: "/api/", message: "Hub Router" });
+	res.send(`
+		<h1>MoodTime</h1>
+		<h2>Available Endpoints:</h2>
+		<ul>
+			<li><a href="/api">/api</a>: Router Hub</li>
+			<ul>
+				<li><a href="/api/openAI">/api/openAI</a>: OpenAI Router</li>
+				<li><a href="/api/spotify">/api/spotify</a>: Spotify Router</li>
+				<ul>
+					<li><a href="/api/spotify/playlist">/api/spotify/playlist</a>: Generate Test Playlist</li>
+				</ul>
+				<li><a href="/api/user">/api/user</a> - User-Facing Endpoints</li>
+				<ul>
+					<li><a href="/api/user/input">/api/user/input</a>: Run CLI program to get user input</li>
+					<li><a href="/api/user/output">/api/user/output</a>: Redirect to \`/api/spotify/playlist\`</li>
+				</ul>
+				<li><a href="/api/transfer">/api/transfer</a> - Data Transfer Endpoints</li>
+			</ul>
+		</ul>
+	`);
 });
 
 //h1 EXPORT
