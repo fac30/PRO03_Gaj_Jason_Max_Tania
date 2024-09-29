@@ -28,7 +28,7 @@ async function extractEmotionFromText(query: openaiQuery): Promise<string[]> {
       });
   
       // Extract the emotion from the response and ensure it's valid JSON
-      const emotionText = response.choices[0].message?.content.trim();  // Trim any extra spaces or characters
+      const emotionText = response.choices[0].message?.content?.trim() ?? '';  // Trim any extra spaces or characters
       //console.log('Raw emotion response:', emotionText);  // Log the raw response for debugging
   
       // Try parsing the result as JSON
