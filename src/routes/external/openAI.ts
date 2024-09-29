@@ -13,16 +13,9 @@ router.get("/", (req: Request, res: Response) => {
   );
 });
 
-router.get("/parseMood", async (req: Request, res: Response) => {
+router.get("/extractEmotion", async (req: Request, res: Response) => {
   const output = await parseMood(demoInput);
   res.json(output);
 });
-
-/* router.get("/parseMood", async (req: Request, res: Response) => {
-  const input = await userInput();
-  const output = await parseMood(input.eventDescription);
-
-  return output;
-}); */
 
 export { router };

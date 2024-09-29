@@ -24,6 +24,4 @@ async function userInput() {
     return userInput;
 }
 
-userInput();
-
 export { userInput };

@@ -4,7 +4,6 @@ import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' a
 import { openaiQuery } from "../../types/openaiQuery.js";
 import { openaiResponse } from "../../types/openaiResponse.js";
 
-
 dotenv.config();
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -110,25 +109,24 @@ function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResp
   
 
 // Main function to process everything
-(async () => {
-  
-    try {
-      const extractedEmotions = await extractEmotionFromText(userInput);
-      //console.log(`Extracted Emotions: ${extractedEmotions}`);
-  
-      const chosenEmotion = getRandomEmotion(extractedEmotions);
-      //console.log(`Randomly Chosen Emotion: ${chosenEmotion}`);
-  
-      const closestEmotion = await findClosestEmotionUsingEmbeddings(chosenEmotion);
-      //console.log('Closest Emotion Match:', JSON.stringify(closestEmotion, null, 2));
+async function runAll () {
+	try {
+		const extractedEmotions = await extractEmotionFromText(userInput);
+		//console.log(`Extracted Emotions: ${extractedEmotions}`);
 
-      const transformedObject = transformEmotionObject(closestEmotion, userInput);
-      console.log(transformedObject);
-  
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  })();
+		const chosenEmotion = getRandomEmotion(extractedEmotions);
+		//console.log(`Randomly Chosen Emotion: ${chosenEmotion}`);
+
+		const closestEmotion = await findClosestEmotionUsingEmbeddings(chosenEmotion);
+		//console.log('Closest Emotion Match:', JSON.stringify(closestEmotion, null, 2));
+
+		const transformedObject = transformEmotionObject(closestEmotion, userInput);
+		console.log(transformedObject);
+
+	} catch (error) {
+		console.error('Error:', error);
+	}
+};
 
 export {
 	extractEmotionFromText,

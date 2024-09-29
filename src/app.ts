@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import express, { Router } from 'express';
+import express, { Router, Request, Response } from 'express';
 import swaggerDocs from './swagger.js';
 import { router as hub } from "./routes/routes.js";
 
@@ -16,5 +16,9 @@ app.listen(keys.port, () => {
 });
 
 app.use('/api', hub);
+
+app.get('/', (req: Request, res: Response) => {
+	res.redirect('/api/');
+});
 
 export { router };

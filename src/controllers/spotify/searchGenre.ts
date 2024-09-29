@@ -260,7 +260,7 @@ const query: spotifyQuery = {
 };
 
 // Calling the function with the query object
-generatePlaylist(query);
+// generatePlaylist(query);
 
 export { 
 	generatePlaylist,
