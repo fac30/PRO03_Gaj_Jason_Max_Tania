@@ -1,9 +1,9 @@
 //h1 IMPORT
 import { Request, Response, Router } from "express";
 import { 
-	extractEmotionFromText as parseMood,
+	generateFeatures as parseMood,
 	userInput as demoInput
-} from "../../controllers/openAI/extractEmotion.js";
+} from "../../controllers/openai/extractEmotion";
 
 const router = Router();
 
