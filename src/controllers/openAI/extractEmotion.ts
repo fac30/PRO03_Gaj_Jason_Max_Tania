@@ -1,8 +1,8 @@
 import OpenAI from "openai";
 import dotenv from 'dotenv';
 import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' assert { type: 'json' };
-import { openaiQuery } from "../../types/openaiQuery.js";
-import { openaiResponse } from "../../types/openaiResponse.js";
+import { openaiQuery } from "../../types/openaiQuery";
+import { openaiResponse } from "../../types/openaiResponse";
 
 dotenv.config();
 
@@ -108,27 +108,34 @@ function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResp
 
   
 
-// Main function to process everything
-async function runAll () {
-	try {
-		const extractedEmotions = await extractEmotionFromText(userInput);
-		//console.log(`Extracted Emotions: ${extractedEmotions}`);
-
-		const chosenEmotion = getRandomEmotion(extractedEmotions);
-		//console.log(`Randomly Chosen Emotion: ${chosenEmotion}`);
-
-		const closestEmotion = await findClosestEmotionUsingEmbeddings(chosenEmotion);
-		//console.log('Closest Emotion Match:', JSON.stringify(closestEmotion, null, 2));
-
-		const transformedObject = transformEmotionObject(closestEmotion, userInput);
-		console.log(transformedObject);
-
-	} catch (error) {
-		console.error('Error:', error);
-	}
-};
+async function generateFeatures(userInput: openaiQuery): Promise<openaiResponse> {
+  try {
+    const extractedEmotions = await extractEmotionFromText(userInput);
+    const chosenEmotion = getRandomEmotion(extractedEmotions);
+    const closestEmotion = await findClosestEmotionUsingEmbeddings(chosenEmotion);
+    const transformedObject = transformEmotionObject(closestEmotion, userInput);
+    console.log(transformedObject);
+    
+    return transformedObject; // Return the transformed object if everything succeeds
+  } catch (error) {
+    console.error('Error:', error);
+    
+    // Return a default object in case of error
+    return {
+      mood: 'neutral',
+      genre: 'ambient',
+      spotifyFeatures: {
+        valence: 0.5,
+        energy: 0.5,
+        danceability: 0.5,
+        tempo: 120,
+        acousticness: 0.5,
+      },
+    };
+  }
+}
 
 export {
-	extractEmotionFromText,
+	generateFeatures,
 	userInput
 };
