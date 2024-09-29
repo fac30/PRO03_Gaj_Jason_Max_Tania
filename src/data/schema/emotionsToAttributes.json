@@ -1,0 +1,284 @@
+{
+    "emotions": [
+      {
+        "name": "Happy",
+        "spotify_features": {
+          "valence": 0.9, 
+          "energy": 0.8,
+          "danceability": 0.8,
+          "acousticness": 0.1,
+          "tempo": 120
+        }
+      },
+      {
+        "name": "Sad",
+        "spotify_features": {
+          "valence": 0.2,
+          "energy": 0.2,
+          "danceability": 0.3,
+          "acousticness": 0.7,
+          "tempo": 60
+        }
+      },
+      {
+        "name": "Admiration",
+        "spotify_features": {
+          "valence": 0.8,
+          "energy": 0.7,
+          "danceability": 0.6,
+          "acousticness": 0.3,
+          "tempo": 110
+        }
+      },
+      {
+        "name": "Amusement",
+        "spotify_features": {
+          "valence": 0.9,
+          "energy": 0.8,
+          "danceability": 0.7,
+          "acousticness": 0.2,
+          "tempo": 120
+        }
+      },
+      {
+        "name": "Approval",
+        "spotify_features": {
+          "valence": 0.8,
+          "energy": 0.6,
+          "danceability": 0.7,
+          "acousticness": 0.4,
+          "tempo": 110
+        }
+      },
+      {
+        "name": "Caring",
+        "spotify_features": {
+          "valence": 0.7,
+          "energy": 0.4,
+          "danceability": 0.5,
+          "acousticness": 0.8,
+          "tempo": 90
+        }
+      },
+      {
+        "name": "Anger",
+        "spotify_features": {
+          "valence": 0.2,
+          "energy": 0.9,
+          "danceability": 0.4,
+          "acousticness": 0.1,
+          "tempo": 130
+        }
+      },
+      {
+        "name": "Annoyance",
+        "spotify_features": {
+          "valence": 0.3,
+          "energy": 0.7,
+          "danceability": 0.5,
+          "acousticness": 0.2,
+          "tempo": 120
+        }
+      },
+      {
+        "name": "Disappointment",
+        "spotify_features": {
+          "valence": 0.2,
+          "energy": 0.3,
+          "danceability": 0.3,
+          "acousticness": 0.6,
+          "tempo": 80
+        }
+      },
+      {
+        "name": "Disapproval",
+        "spotify_features": {
+          "valence": 0.3,
+          "energy": 0.5,
+          "danceability": 0.4,
+          "acousticness": 0.4,
+          "tempo": 90
+        }
+      },
+      {
+        "name": "Confusion",
+        "spotify_features": {
+          "valence": 0.4,
+          "energy": 0.5,
+          "danceability": 0.4,
+          "acousticness": 0.3,
+          "tempo": 100
+        }
+      },
+      {
+        "name": "Desire",
+        "spotify_features": {
+          "valence": 0.7,
+          "energy": 0.8,
+          "danceability": 0.7,
+          "acousticness": 0.2,
+          "tempo": 120
+        }
+      },
+      {
+        "name": "Excitement",
+        "spotify_features": {
+          "valence": 0.9,
+          "energy": 0.9,
+          "danceability": 0.7,
+          "acousticness": 0.1,
+          "tempo": 140
+        }
+      },
+      {
+        "name": "Gratitude",
+        "spotify_features": {
+          "valence": 0.8,
+          "energy": 0.5,
+          "danceability": 0.6,
+          "acousticness": 0.5,
+          "tempo": 100
+        }
+      },
+      {
+        "name": "Joy",
+        "spotify_features": {
+          "valence": 0.9,
+          "energy": 0.8,
+          "danceability": 0.8,
+          "acousticness": 0.2,
+          "tempo": 125
+        }
+      },
+      {
+        "name": "Disgust",
+        "spotify_features": {
+          "valence": 0.1,
+          "energy": 0.8,
+          "danceability": 0.3,
+          "acousticness": 0.1,
+          "tempo": 110
+        }
+      },
+      {
+        "name": "Embarrassment",
+        "spotify_features": {
+          "valence": 0.3,
+          "energy": 0.4,
+          "danceability": 0.5,
+          "acousticness": 0.5,
+          "tempo": 90
+        }
+      },
+      {
+        "name": "Fear",
+        "spotify_features": {
+          "valence": 0.2,
+          "energy": 0.9,
+          "danceability": 0.4,
+          "acousticness": 0.2,
+          "tempo": 140
+        }
+      },
+      {
+        "name": "Grief",
+        "spotify_features": {
+          "valence": 0.1,
+          "energy": 0.2,
+          "danceability": 0.3,
+          "acousticness": 0.7,
+          "tempo": 60
+        }
+      },
+      {
+        "name": "Curiosity",
+        "spotify_features": {
+          "valence": 0.6,
+          "energy": 0.7,
+          "danceability": 0.5,
+          "acousticness": 0.4,
+          "tempo": 115
+        }
+      },
+      {
+        "name": "Love",
+        "spotify_features": {
+          "valence": 0.8,
+          "energy": 0.7,
+          "danceability": 0.6,
+          "acousticness": 0.6,
+          "tempo": 100
+        }
+      },
+      {
+        "name": "Optimism",
+        "spotify_features": {
+          "valence": 0.8,
+          "energy": 0.7,
+          "danceability": 0.7,
+          "acousticness": 0.3,
+          "tempo": 115
+        }
+      },
+      {
+        "name": "Pride",
+        "spotify_features": {
+          "valence": 0.9,
+          "energy": 0.8,
+          "danceability": 0.7,
+          "acousticness": 0.2,
+          "tempo": 125
+        }
+      },
+      {
+        "name": "Relief",
+        "spotify_features": {
+          "valence": 0.7,
+          "energy": 0.4,
+          "danceability": 0.5,
+          "acousticness": 0.7,
+          "tempo": 90
+        }
+      },
+      {
+        "name": "Nervousness",
+        "spotify_features": {
+          "valence": 0.3,
+          "energy": 0.6,
+          "danceability": 0.4,
+          "acousticness": 0.2,
+          "tempo": 130
+        }
+      },
+      {
+        "name": "Remorse",
+        "spotify_features": {
+          "valence": 0.2,
+          "energy": 0.3,
+          "danceability": 0.4,
+          "acousticness": 0.6,
+          "tempo": 80
+        }
+      },
+      {
+        "name": "Realization",
+        "spotify_features": {
+          "valence": 0.5,
+          "energy": 0.5,
+          "danceability": 0.5,
+          "acousticness": 0.5,
+          "tempo": 100
+        }
+      },
+      {
+        "name": "Surprise",
+        "spotify_features": {
+          "valence": 0.8,
+          "energy": 0.8,
+          "danceability": 0.6,
+          "acousticness": 0.3,
+          "tempo": 130
+        }
+      }
+    ]
+  }
