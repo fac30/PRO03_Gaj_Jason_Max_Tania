@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import express, { Router, Request, Response } from 'express';
-import swaggerDocs from './swagger.js';
-import { router as hub } from "./routes/routes.js";
+import swaggerDocs from './swagger';
+import { router as hub } from "./routes/routes";
 
 dotenv.config();
 const keys = { port: process.env.PORT };
