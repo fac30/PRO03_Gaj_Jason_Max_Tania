@@ -1,5 +1,5 @@
-import express, { Router, Request, Response } from 'express';
-import { searchGenre as generatePlaylist } from '../spotify/searchGenre.js';
+import express, { Request, Response } from 'express';
+import { searchGenre as generatePlaylist } from './spotify/searchGenre.js';
 const router = express.Router();
 
 /**
