@@ -129,3 +129,8 @@ function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResp
       console.error('Error:', error);
     }
   })();
+
+export {
+	extractEmotionFromText,
+	userInput
+};
