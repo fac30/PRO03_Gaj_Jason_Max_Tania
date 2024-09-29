@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { searchGenre as generatePlaylist } from './spotify/searchGenre.js';
+import { generatePlaylist, query } from './spotify/searchGenre.js';
 const router = express.Router();
 
 /**
@@ -28,9 +28,8 @@ const router = express.Router();
 function userOutput () {}
 
 router.get('/playlist', async (req: Request, res: Response) => {
-  const userInput = req.body;
-    const playlist = await generatePlaylist(userInput);
-    res.status(200).json(playlist);
+  const playlist = await generatePlaylist(query);
+	res.status(200).json(playlist);
 });
 
 export { userOutput };

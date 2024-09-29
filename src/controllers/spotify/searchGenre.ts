@@ -220,11 +220,11 @@ async function generatePlaylist(query: spotifyQuery) {
             );
           }
           const song: track = {
-            title: track.name,
-            artist: track.artists[0].name,
-            album: track.album.name,
-            releaseDate: new Date(track.album.release_date),
-            duration: track.duration_ms,
+            title: track?.name ?? '',
+            artist: track?.artists[0].name ?? '',
+            album: track?.album.name ?? '',
+            releaseDate: new Date(track?.album.release_date ?? ''),
+            duration: track?.duration_ms ?? 0,
           };
           playlist.push(song);
         });
@@ -261,3 +261,8 @@ const query: spotifyQuery = {
 
 // Calling the function with the query object
 generatePlaylist(query);
+
+export { 
+	generatePlaylist,
+	query
+};
