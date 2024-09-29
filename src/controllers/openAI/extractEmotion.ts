@@ -7,10 +7,7 @@ import { openaiResponse } from "../../types/openaiResponse.js";
 
 dotenv.config();
 
-// Initialize OpenAI with your API key from the environment variables
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 //example 
 const userInput: openaiQuery = {
