@@ -23,14 +23,14 @@ const userInput: openaiQuery = {
 async function extractEmotionFromText(query: openaiQuery): Promise<string[]> {
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4o',
       messages: [
         { role: 'user', content: query.eventDescription },
         { role: 'system', content: 'Please extract the mood or emotions from the above text. It should be 3-5 emotions as an array of strings, and the output should be a valid JSON array.' }
       ],
     });
 
-    const emotionText = response.choices[0].message?.content.trim();
+    const emotionText = response.choices[0].message?.content?.trim() ?? '';
     const emotions = JSON.parse(emotionText);
     return emotions;
 
@@ -92,7 +92,7 @@ function transformEmotionObject(closestEmotion: string, query: openaiQuery): ope
 }
 
 // Main function to process everything
-(async () => {
+async function generateFeatures(userInput: openaiQuery): Promise<openaiResponse> {
   try {
     const extractedEmotions = await extractEmotionFromText(userInput);
     //console.log(`Extracted Emotions: ${extractedEmotions}`);
@@ -110,5 +110,23 @@ function transformEmotionObject(closestEmotion: string, query: openaiQuery): ope
 
   } catch (error) {
     console.error('Error:', error);
+
+    // Return a default object in case of error
+    return {
+      mood: 'neutral',
+      genre: 'ambient',
+      spotifyFeatures: {
+        valence: 0.5,
+        energy: 0.5,
+        danceability: 0.5,
+        tempo: 120,
+        acousticness: 0.5,
+      },
+    };
   }
-})();
+}
+
+export {
+	generateFeatures,
+	userInput
+};
