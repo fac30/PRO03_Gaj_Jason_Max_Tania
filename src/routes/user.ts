@@ -1,6 +1,6 @@
 //h1 IMPORT
 import { Request, Response, Router } from "express";
-import { userInput } from "../../controllers/getInput.js";
+import { userInput } from "../controllers/getInput.js";
 
 const router = Router();
 

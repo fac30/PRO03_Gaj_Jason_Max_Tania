@@ -1,6 +1,6 @@
 //h1 IMPORT
 import { Router, Request, Response } from 'express';
-import { generatePlaylist, query } from '../../controllers/spotify/searchGenre.js';
+import { generatePlaylist, query } from '../controllers/spotify/searchGenre.js';
 
 const router = Router();
 
