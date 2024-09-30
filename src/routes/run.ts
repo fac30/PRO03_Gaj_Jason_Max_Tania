@@ -12,9 +12,8 @@ import { SpotifyResponse } from '../types/spotifyResponse';
 const router = Router();
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
-    console.log('GET /api/ route hit');
 	try {
-		// 1. Call userInput() directly
+		// 1. Get user inputs through query url parameters
 		const { musicGenre, eventDescription, date, playlistCount } = req.query as { [key: string]: string };
 
 		// 2. Call generateFeatures() directly
