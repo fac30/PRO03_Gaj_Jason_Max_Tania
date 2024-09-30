@@ -1,10 +1,10 @@
 import OpenAI from "openai";
 import dotenv from 'dotenv';
-import { getEmbeddingForText } from './getEmbeddings.js';
+import { getEmbeddingForText } from '../../controllers/openAI/getEmbeddings';
 import precomputedEmbeddings from '../../data/schema/precomputedEmbeddings.json' assert { type: 'json' };
 import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' assert { type: 'json' };
 import { openaiQuery } from "../../types/openaiQuery.js";
-import { openaiResponse } from "../../types/openaiResponse.js"
+import { openaiResponse, Emotion } from "../../types/openaiResponse.js"
 
 dotenv.config();
 
@@ -80,8 +80,18 @@ async function findClosestEmotionUsingPrecomputedEmbeddings(extractedEmotion: st
 
 // Function to transform the object
 function transformEmotionObject(closestEmotion: string, query: openaiQuery): openaiResponse {
-  // Step 1: Find the closest emotion in emotionsToAttributes.json
-  const emotionObj = emotionsToAttributes.emotions.find((emotion: any) => emotion.name === closestEmotion);
+  // // Step 1: Find the closest emotion in emotionsToAttributes.json
+  // const emotionObj = emotionsToAttributes.emotions.find((emotion: any) => emotion.name === closestEmotion);
+  
+  // Step 1: Find the closest emotion in emotionsToAttributes
+  const emotionObj: Emotion | undefined = emotionsToAttributes.emotions.find(
+    (emotion: Emotion) => emotion.name === closestEmotion
+  );
+  
+  // Handle the case where the emotion is not found
+  if (!emotionObj) {
+    throw new Error(`Emotion ${closestEmotion} not found`);
+  }
 
   // Step 3: Create the response object
   return {
