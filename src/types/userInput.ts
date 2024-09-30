@@ -1,5 +1,5 @@
 import { openaiQuery } from "./openaiQuery"
 
 export interface userInput extends openaiQuery {
-    date: string
+    date: Date
 };

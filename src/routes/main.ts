@@ -14,7 +14,7 @@ router.get('/', async (req: Request, res: Response) => {
         const result = await moodTimeApi({
             musicGenre: musicGenre as string,
             eventDescription: eventDescription as string,
-            date: date as string,
+            date: new Date(date) as Date
         });
 
         res.json(result);
