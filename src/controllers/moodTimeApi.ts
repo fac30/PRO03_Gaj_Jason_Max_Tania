@@ -1,4 +1,4 @@
-import { userInput } from "../types/userInput";
+/* import { UserInput } from "../types/userInput";
 import { openaiQuery } from "../types/openaiQuery";
 import { openaiResponse } from "../types/openaiResponse";
 import { spotifyQuery } from "../types/spotifyQuery";
@@ -24,3 +24,4 @@ async function moodTimeApi(input: userInput) {
 }
 
 export { moodTimeApi };
+ */
