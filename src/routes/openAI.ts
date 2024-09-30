@@ -3,13 +3,13 @@ import { NextFunction, Request, Response, Router } from "express";
 import { 
 	generateFeatures as parseMood,
 	userInput as demoInput
-} from "../controllers/openAI/extractEmotion.js";
+} from "../controllers/openai/extractEmotion";
 
 const router = Router();
 
 router.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.json(
-    { route: "/api/openAI/", message: "openAI Router" }
+    { route: "/api/openai/", message: "openai Router" }
   );
 	next("")
 });
