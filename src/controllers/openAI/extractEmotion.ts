@@ -95,16 +95,18 @@ function transformEmotionObject(closestEmotion: string, query: openaiQuery): ope
 (async () => {
   try {
     const extractedEmotions = await extractEmotionFromText(userInput);
-    console.log(`Extracted Emotions: ${extractedEmotions}`);
+    //console.log(`Extracted Emotions: ${extractedEmotions}`);
 
     const chosenEmotion = getRandomEmotion(extractedEmotions);
-    console.log(`Randomly Chosen Emotion: ${chosenEmotion}`);
+    //console.log(`Randomly Chosen Emotion: ${chosenEmotion}`);
 
     const closestEmotion = await findClosestEmotionUsingPrecomputedEmbeddings(chosenEmotion);
-    console.log('Closest Emotion Match:', JSON.stringify(closestEmotion, null, 2));
+    //console.log('Closest Emotion Match:', JSON.stringify(closestEmotion, null, 2));
 
     const transformedObject = transformEmotionObject(closestEmotion, userInput);
-    console.log(transformedObject);
+    //console.log(transformedObject);
+
+    return transformedObject;
 
   } catch (error) {
     console.error('Error:', error);
