@@ -57,7 +57,7 @@ Server --> Playlist
 
 ## Project Structure
 
-```
+```src
 ├── controllers
 │   ├── openai
 │   │   └── index.ts

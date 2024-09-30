@@ -1,6 +1,6 @@
 //h1 IMPORT
 import { Request, Response, Router } from "express";
-import { userInput } from "../controllers/getInput";
+import { getUserInput } from "../controllers/userInput";
 
 const router = Router();
 
@@ -13,7 +13,7 @@ router.get("/", (req: Request, res: Response) => {
 
 router.get('/input', async (req: Request, res: Response) => {
 	try {
-    const input = await userInput();
+    const input = await getUserInput();
     res.json(input);
   } catch (error) {
     console.error("Error getting user input:", error);

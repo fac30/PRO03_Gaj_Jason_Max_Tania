@@ -1,4 +1,4 @@
-export interface track {
+export interface Track {
     id: string,
     title: string,
     artist: string,
@@ -7,4 +7,4 @@ export interface track {
     duration: number
 };
 
-export type spotifyResponse = track[];
+export type SpotifyResponse = Track[];

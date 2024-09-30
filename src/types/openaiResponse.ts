@@ -1,4 +1,4 @@
-export interface spotifyFeatures {
+export interface SpotifyFeatures {
     valence: number, 
     energy: number,
     danceability: number,
@@ -6,8 +6,8 @@ export interface spotifyFeatures {
     tempo: number
 }
 
-export interface openaiResponse {
+export interface OpenAIResponse {
     mood: string,
     genre: string,
-    spotifyFeatures: spotifyFeatures
+    spotifyFeatures: SpotifyFeatures
 };

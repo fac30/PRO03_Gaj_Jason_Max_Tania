@@ -1,13 +1,13 @@
-import { openaiResponse } from "./openaiResponse";
+import { OpenAIResponse } from "./openaiResponse";
 
-export interface spotifyQuery extends openaiResponse {
-    date: Date,
+export interface SpotifyQuery extends OpenAIResponse {
+    date: string,
 };
 
 /*
 Instantiating an entire spotifyQuery object will look like:
 
-const query: spotifyQuery = {
+const query: SpotifyQuery = {
     date: ...,
     mood: "sad",
     genre: "jazz"

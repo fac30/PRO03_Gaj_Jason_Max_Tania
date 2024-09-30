@@ -1,15 +1,16 @@
 //h1 IMPORT
 import { Request, Response, Router } from "express";
-import { router as user } from "./user";
 import { router as openAI } from "./openAI";
 import { router as spotify } from "./spotify";
-
+import { router as user } from "./user";
+import { router as run } from "./run";
 const router = Router();
 
 //h1 Router
 router.use('/openAI', openAI);
 router.use('/spotify', spotify);
 router.use('/user', user);
+router.use('/run', run);
 
 //h2 Routes
 router.get('/menu', (req: Request, res: Response) => {

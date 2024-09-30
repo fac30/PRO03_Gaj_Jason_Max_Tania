@@ -1,5 +1,5 @@
-import { openaiQuery } from "./openaiQuery"
+import { OpenAIQuery } from "./openaiQuery"
 
-export interface userInput extends openaiQuery {
+export interface UserInput extends OpenAIQuery {
     date: Date
 };

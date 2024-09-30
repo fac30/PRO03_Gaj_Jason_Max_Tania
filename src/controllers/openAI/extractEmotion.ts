@@ -1,21 +1,21 @@
 import OpenAI from "openai";
 import dotenv from 'dotenv';
 import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' assert { type: 'json' };
-import { openaiQuery } from "../../types/openaiQuery";
-import { openaiResponse } from "../../types/openaiResponse";
+import { OpenAIQuery } from "../../types/openaiQuery";
+import { OpenAIResponse } from "../../types/openaiResponse";
 
 dotenv.config();
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 //example 
-const userInput: openaiQuery = {
+const userInput: OpenAIQuery = {
   eventDescription: "I feel amazing and happy today, filled with excitement!",
   musicGenre: "pop"
 }
 
 //function to extract emotions from text
-async function extractEmotionFromText(query: openaiQuery): Promise<string[]> {
+async function extractEmotionFromText(query: OpenAIQuery): Promise<string[]> {
     try {
       // Call the OpenAI Chat Completion API
       const response = await openai.chat.completions.create({
@@ -98,7 +98,7 @@ async function findClosestEmotionUsingEmbeddings(extractedEmotion: string): Prom
 
 
 // Function to transform the object
-function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResponse {
+function transformEmotionObject(emotionObj: any, query: OpenAIQuery): OpenAIResponse {
   return {
     mood: emotionObj.name,
     genre: query.musicGenre, 
@@ -108,7 +108,7 @@ function transformEmotionObject(emotionObj: any, query: openaiQuery): openaiResp
 
   
 
-async function generateFeatures(userInput: openaiQuery): Promise<openaiResponse> {
+async function generateFeatures(userInput: OpenAIQuery): Promise<OpenAIResponse> {
   try {
     const extractedEmotions = await extractEmotionFromText(userInput);
     const chosenEmotion = getRandomEmotion(extractedEmotions);
