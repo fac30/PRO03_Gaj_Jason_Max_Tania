@@ -1,22 +1,14 @@
-import { openaiResponse } from "./openaiResponse.js";
-
-export interface spotifyFeatures {
-    valence: number, 
-    energy: number,
-    danceability: number,
-    acousticness: number,
-    tempo: number
-}
+import { openaiResponse } from "./openaiResponse";
 
 export interface spotifyQuery extends openaiResponse {
     date: Date,
-    spotifyFeatures: spotifyFeatures
 };
 
 /*
 Instantiating an entire spotifyQuery object will look like:
 
 const query: spotifyQuery = {
+    date: ...,
     mood: "sad",
     genre: "jazz"
     spotifyFeatures: {
