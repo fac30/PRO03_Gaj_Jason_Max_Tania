@@ -1,4 +1,4 @@
-# What is 'emotionsTOAttributes.json'?
+# What is 'emotionsToAttributes.json'?
 
 Each emotion has been assigned a relevant set of Spotify audio features.
 

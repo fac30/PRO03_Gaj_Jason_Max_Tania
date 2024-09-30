@@ -1,7 +1,8 @@
 import SpotifyWebApi from "spotify-web-api-node";
 import * as dotenv from "dotenv";
-import { spotifyResponse, track } from "../../types/spotifyResponse.js";
-import { spotifyQuery, spotifyFeatures } from "../../types/spotifyQuery.js";
+import { spotifyResponse, track } from "../../types/spotifyResponse";
+import { spotifyQuery } from "../../types/spotifyQuery";
+import {spotifyFeatures } from "../../types/openaiResponse";
 
 dotenv.config();
 
@@ -69,8 +70,7 @@ async function getAudioFeaturesInBatches(
   return audioFeatures; // Returning all collected audio features
 }
 
-// Main function to search tracks based on genre, date range, and audio features
-async function generatePlaylist(query: spotifyQuery) {
+async function generatePlaylist(query: spotifyQuery): Promise<spotifyResponse> {
   try {
     await getAccessToken(); // Ensuring we have a valid access token before making API calls
 
@@ -90,75 +90,64 @@ async function generatePlaylist(query: spotifyQuery) {
     let allTracks: SpotifyApi.TrackObjectFull[] = [];
 
     // Making multiple API calls to gather a larger set of tracks
-    // This expands on the original script's effective method of fetching tracks by genre
     for (let i = 0; i < 6; i++) {
-      // Making 6 API calls to get 300 tracks in total
       const searchResults = await spotifyApi.searchTracks(searchQuery, {
         limit: 50,
-        offset: i * 50, // Using offset to fetch different sets of tracks
+        offset: i * 50,
       });
       const tracks = searchResults.body.tracks?.items;
       if (tracks && tracks.length > 0) {
-        allTracks = allTracks.concat(tracks); // Accumulating all tracks into one array
+        allTracks = allTracks.concat(tracks);
       }
     }
 
     if (allTracks.length > 0) {
       console.log(
-        `Found ${allTracks.length} tracks in the genre '${genre}' between ${startYear} and ${endYear}:`,
+        `Found ${allTracks.length} tracks in the genre '${genre}' between ${startYear} and ${endYear}:`
       );
 
       const trackIds = allTracks.map((track) => track.id); // Extracting track IDs for audio feature requests
 
       // Fetching audio features for all tracks in batches
-      const audioFeatures = await getAudioFeaturesInBatches(
-        trackIds,
-        spotifyApi,
-      );
+      const audioFeatures = await getAudioFeaturesInBatches(trackIds, spotifyApi);
 
       // Sorting tracks based on how closely they match the desired audio features
       const sortedTracks = audioFeatures
-        ?.filter((feature) => feature) // Filtering out any undefined features
+        ?.filter((feature) => feature)
         .map((feature) => {
           if (!feature) return null;
 
-          // Calculating differences between each track's features and the target features
           return {
             feature,
             differences: {
               valence: calculateFeatureDifference(
                 feature.valence,
-                spotifyFeatures.valence,
+                spotifyFeatures.valence
               ),
               energy: calculateFeatureDifference(
                 feature.energy,
-                spotifyFeatures.energy,
+                spotifyFeatures.energy
               ),
               danceability: calculateFeatureDifference(
                 feature.danceability,
-                spotifyFeatures.danceability,
+                spotifyFeatures.danceability
               ),
               tempo: calculateFeatureDifference(
                 feature.tempo,
-                spotifyFeatures.tempo,
+                spotifyFeatures.tempo
               ),
               acousticness: calculateFeatureDifference(
                 feature.acousticness,
-                spotifyFeatures.acousticness,
+                spotifyFeatures.acousticness
               ),
             },
           };
         })
-        .filter(
-          (
-            item,
-          ): item is {
-            feature: SpotifyApi.AudioFeaturesObject;
-            differences: spotifyFeatures;
-          } => item !== null,
-        )
+        .filter((item): item is {
+          feature: SpotifyApi.AudioFeaturesObject;
+          differences: spotifyFeatures;
+        } => item !== null)
         .sort((a, b) => {
-          // Prioritizing valence and energy equally, then danceability, tempo, and acousticness
           const valenceEnergyDifference =
             a.differences.valence +
             a.differences.energy -
@@ -171,12 +160,10 @@ async function generatePlaylist(query: spotifyQuery) {
           );
         });
 
-      // Removing duplicate artists to ensure diversity in the playlist
       const uniqueArtistTracks = sortedTracks.filter((item, index, self) => {
         const track = allTracks.find((t) => t.id === item.feature.id);
         if (!track) return false;
         const artistName = track.artists[0].name;
-        // Keeping only the first occurrence of each artist
         return (
           index ===
           self.findIndex((t) => {
@@ -186,61 +173,47 @@ async function generatePlaylist(query: spotifyQuery) {
         );
       });
 
-      // Selecting the top 10 tracks that best match the criteria
       const topTracks = uniqueArtistTracks.slice(0, 10);
       const playlist: spotifyResponse = [];
 
       if (topTracks.length > 0) {
         console.log(
-          `Returning ${topTracks.length} tracks matching audio feature criteria:`,
+          `Returning ${topTracks.length} tracks matching audio feature criteria:`
         );
 
-        // Displaying detailed information about each selected track
         topTracks.forEach((item, index) => {
           const track = allTracks.find((t) => t.id === item.feature.id);
           if (track) {
             const releaseDate = track.album.release_date;
             console.log(
-              `${index + 1}. ${track.name} by ${track.artists[0].name}, Release Date: ${releaseDate}`,
+              `${index + 1}. ${track.name} by ${track.artists[0].name}, Release Date: ${releaseDate}`
             );
-            console.log(
-              `   Valence: ${item.feature.valence.toFixed(2)} (Target: ${spotifyFeatures.valence})`,
-            );
-            console.log(
-              `   Energy: ${item.feature.energy.toFixed(2)} (Target: ${spotifyFeatures.energy})`,
-            );
-            console.log(
-              `   Danceability: ${item.feature.danceability.toFixed(2)} (Target: ${spotifyFeatures.danceability})`,
-            );
-            console.log(
-              `   Acousticness: ${item.feature.acousticness.toFixed(2)} (Target: ${spotifyFeatures.acousticness})`,
-            );
-            console.log(
-              `   Tempo: ${item.feature.tempo.toFixed(2)} BPM (Target: ${spotifyFeatures.tempo})`,
-            );
+            const song: track = {
+              id: track?.id ?? '',
+              title: track?.name ?? '',
+              artist: track?.artists[0].name ?? '',
+              album: track?.album.name ?? '',
+              releaseDate: new Date(track?.album.release_date ?? ''),
+              duration: track?.duration_ms ?? 0,
+            };
+            playlist.push(song);
           }
-          const song: track = {
-            title: track?.name ?? '',
-            artist: track?.artists[0].name ?? '',
-            album: track?.album.name ?? '',
-            releaseDate: new Date(track?.album.release_date ?? ''),
-            duration: track?.duration_ms ?? 0,
-          };
-          playlist.push(song);
         });
 
+        return playlist; // Return playlist if tracks are found
       } else {
         console.log("No tracks found matching the audio feature criteria.");
+        return []; // Return an empty array if no matching tracks are found
       }
-      console.log(playlist);
-      return playlist; // Returning the top tracks
     } else {
       console.log(
-        `No tracks found in the genre '${genre}' between ${startYear} and ${endYear}`,
+        `No tracks found in the genre '${genre}' between ${startYear} and ${endYear}`
       );
+      return []; // Return an empty array if no tracks are found
     }
   } catch (error) {
     console.error("Error searching for tracks:", error);
+    return []; // Return an empty array in case of error
   }
 }
 
