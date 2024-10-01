@@ -1,8 +1,8 @@
 import SpotifyWebApi from "spotify-web-api-node";
 import * as dotenv from "dotenv";
-import { spotifyResponse, track } from "../../types/spotifyResponse";
-import { spotifyQuery } from "../../types/spotifyQuery";
-import {spotifyFeatures } from "../../types/openaiResponse";
+import { SpotifyResponse, Track } from "../../types/spotifyResponse";
+import { SpotifyQuery } from "../../types/spotifyQuery";
+import {SpotifyFeatures } from "../../types/openaiResponse";
 
 dotenv.config();
 
@@ -70,15 +70,15 @@ async function getAudioFeaturesInBatches(
   return audioFeatures; // Returning all collected audio features
 }
 
-async function generatePlaylist(query: spotifyQuery): Promise<spotifyResponse> {
+async function generatePlaylist(query: SpotifyQuery): Promise<SpotifyResponse> {
   try {
     await getAccessToken(); // Ensuring we have a valid access token before making API calls
 
     const { genre, date, spotifyFeatures } = query; // Destructuring the query object
 
     // Calculating the start and end dates for the 12-month range prior to the given date
-    const endDate = new Date(date);
-    const startDate = new Date(date);
+    const endDate = date;
+    const startDate = date;
     startDate.setFullYear(startDate.getFullYear() - 1); // Subtracting one year to get the start date
 
     const startYear = startDate.getFullYear();
@@ -145,7 +145,7 @@ async function generatePlaylist(query: spotifyQuery): Promise<spotifyResponse> {
         })
         .filter((item): item is {
           feature: SpotifyApi.AudioFeaturesObject;
-          differences: spotifyFeatures;
+          differences: SpotifyFeatures;
         } => item !== null)
         .sort((a, b) => {
           const valenceEnergyDifference =
@@ -173,8 +173,8 @@ async function generatePlaylist(query: spotifyQuery): Promise<spotifyResponse> {
         );
       });
 
-      const topTracks = uniqueArtistTracks.slice(0, 10);
-      const playlist: spotifyResponse = [];
+      const topTracks = uniqueArtistTracks.slice(0, query.playlistCount);
+      const playlist: SpotifyResponse = [];
 
       if (topTracks.length > 0) {
         console.log(
@@ -188,7 +188,7 @@ async function generatePlaylist(query: spotifyQuery): Promise<spotifyResponse> {
             console.log(
               `${index + 1}. ${track.name} by ${track.artists[0].name}, Release Date: ${releaseDate}`
             );
-            const song: track = {
+            const song: Track = {
               id: track?.id ?? '',
               title: track?.name ?? '',
               artist: track?.artists[0].name ?? '',
@@ -219,10 +219,11 @@ async function generatePlaylist(query: spotifyQuery): Promise<spotifyResponse> {
 
 // Example usage:
 // Creating a query object with desired genre, date, and audio features
-const query: spotifyQuery = {
+const query: SpotifyQuery = {
   genre: "jazz",
   mood: "jazzy",
   date: new Date("2024-09-23T19:00:00.000Z"),
+  playlistCount: 10,
   spotifyFeatures: {
     valence: 0.8,
     energy: 0.7,

@@ -1,26 +1,30 @@
 // IMPORT
 import { NextFunction, Request, Response, Router } from "express";
-/* import { moodTimeApi } from "../controllers/moodTimeApi"; */
 import { collateData } from "../controllers/collateData";
 import { getUserInput } from "../controllers/userInput";
-import { generateFeatures } from '../controllers/openAI/extractEmotion';
+import { generateFeatures } from '../controllers/openai/extractEmotion';
 import { generatePlaylist } from '../controllers/spotify/generatePlaylist';
+import { OpenAIQuery } from '../types/openaiQuery';
+import { OpenAIResponse } from '../types/openaiResponse';
+import { SpotifyQuery } from '../types/spotifyQuery';
+import { SpotifyResponse } from '../types/spotifyResponse';
 
 const router = Router();
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		// 1. Call userInput() directly
-		const userInputData = await getUserInput();
+		// 1. Get user inputs through query url parameters
+		const { musicGenre, eventDescription, date, playlistCount } = req.query as { [key: string]: string };
 
 		// 2. Call generateFeatures() directly
-		const features = await generateFeatures(userInputData);
+        const openaiQuery: OpenAIQuery = { musicGenre, eventDescription };
+		const features: OpenAIResponse = await generateFeatures(openaiQuery);
 
 		// 3. Call collateData() to combine output of generateFeatures() and date from userInput
-		const collatedData = collateData(features, userInputData.date);
+		const spotifyQuery: SpotifyQuery = collateData(features, date, parseInt(playlistCount, 10));
 
 		// 4. Call generatePlaylist() directly to get playlist
-		const playlist = await generatePlaylist(collatedData);
+		const playlist: SpotifyResponse = await generatePlaylist(spotifyQuery);
 
 		res.json(playlist);
 	} catch (error: any) {
@@ -28,22 +32,5 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 	}
 });
 
-/* router.get('/old', async (req: Request, res: Response) => {
-    // Destructure query parameters from req.query
-    const { musicGenre, eventDescription, date } = req.query;
-
-    try {
-        // Call moodTimeApi with query parameters
-        const result = await moodTimeApi({
-            musicGenre: musicGenre as string,
-            eventDescription: eventDescription as string,
-            date: new Date(date) as Date
-        });
-
-        res.json(result);
-    } catch (error: any) {
-        res.status(500).json({ error: error.message });
-    }
-}); */
 // EXPORT
 export { router };
