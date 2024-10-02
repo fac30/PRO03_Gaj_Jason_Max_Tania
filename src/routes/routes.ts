@@ -13,6 +13,10 @@ router.use('/user', user);
 router.use('/run', run);
 
 //h2 Routes
+router.get('/', (req: Request, res: Response) => {
+	res.redirect('/api/menu');
+});
+
 router.get('/menu', (req: Request, res: Response) => {
 	res.send(`
 		<h1>MoodTime</h1>
