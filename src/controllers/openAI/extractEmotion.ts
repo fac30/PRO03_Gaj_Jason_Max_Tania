@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import { getEmbeddingForText } from '../../controllers/openAI/getEmbeddings';
 import precomputedEmbeddings from '../../data/schema/precomputedEmbeddings.json' assert { type: 'json' };
 import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' assert { type: 'json' };
-import { openaiQuery } from "../../types/openaiQuery.js";
-import { openaiResponse, Emotion } from "../../types/openaiResponse.js"
+import { OpenAIQuery } from "../../types/openaiQuery.js";
+import { OpenAIResponse, Emotion } from "../../types/openaiResponse.js"
 
 dotenv.config();
 
@@ -14,13 +14,13 @@ const openai = new OpenAI({
 });
 
 // Example user input
-const userInput: openaiQuery = {
+const userInput: OpenAIQuery = {
   eventDescription: "I was so sad and didn't know what to expect, but suddenly everything changed and I felt myself really better.",
   musicGenre: "sad"
 };
 
 // Function to extract emotions from text
-async function extractEmotionFromText(query: openaiQuery): Promise<string[]> {
+async function extractEmotionFromText(query: OpenAIQuery): Promise<string[]> {
   try {
     const response = await openai.chat.completions.create({
       model: 'gpt-4o',
@@ -79,7 +79,7 @@ async function findClosestEmotionUsingPrecomputedEmbeddings(extractedEmotion: st
 
 
 // Function to transform the object
-function transformEmotionObject(closestEmotion: string, query: openaiQuery): openaiResponse {
+function transformEmotionObject(closestEmotion: string, query: OpenAIQuery): OpenAIResponse {
   // // Step 1: Find the closest emotion in emotionsToAttributes.json
   // const emotionObj = emotionsToAttributes.emotions.find((emotion: any) => emotion.name === closestEmotion);
   
@@ -102,7 +102,7 @@ function transformEmotionObject(closestEmotion: string, query: openaiQuery): ope
 }
 
 // Main function to process everything
-async function generateFeatures(userInput: openaiQuery): Promise<openaiResponse> {
+async function generateFeatures(userInput: OpenAIQuery): Promise<OpenAIResponse> {
   try {
     const extractedEmotions = await extractEmotionFromText(userInput);
     //console.log(`Extracted Emotions: ${extractedEmotions}`);
@@ -123,7 +123,7 @@ async function generateFeatures(userInput: openaiQuery): Promise<openaiResponse>
 
     // Return a default object in case of error
     return {
-      mood: 'neutral',
+      mood: 'thats an error',
       genre: 'ambient',
       spotifyFeatures: {
         valence: 0.5,

@@ -18,7 +18,8 @@ async function getUserInput(): Promise<UserInput> {
     const userInput: UserInput = {
         eventDescription: mood,
         musicGenre: genre,
-        date: new Date()
+        date: new Date(),
+        playlistCount: 0 //add a value for playlist
     };
     
     /* userInput.date.setFullYear(parseInt(await prompt(`Type a 4 digit year`), 10));

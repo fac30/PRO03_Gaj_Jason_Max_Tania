@@ -10,6 +10,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+interface EmotionEmbedding {
+  name: string;
+  spotify_features: any;  
+  embedding: any;
+}
+
 // Function to get embeddings for any given text using OpenAI's embeddings API
 export async function getEmbeddingForText(text: string): Promise<number[]> {
   const response = await openai.embeddings.create({
@@ -21,7 +27,7 @@ export async function getEmbeddingForText(text: string): Promise<number[]> {
 
 // Function to precompute embeddings for all emotions and save them in a file (to be run once)
 export async function precomputeAndSaveEmbeddings() {
-  const emotionEmbeddings = {};
+  const emotionEmbeddings: { [key: string]: EmotionEmbedding } = {};
 
   for (const emotion of emotionsToAttributes.emotions) {
     const embedding = await getEmbeddingForText(emotion.name);
