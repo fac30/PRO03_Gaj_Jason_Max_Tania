@@ -1,5 +1,6 @@
-import { openaiQuery } from "./openaiQuery"
+import { OpenAIQuery } from "./openaiQuery"
 
-export interface userInput extends openaiQuery {
-    date: Date
+export interface UserInput extends OpenAIQuery {
+    date: Date,
+    playlistCount: number
 };

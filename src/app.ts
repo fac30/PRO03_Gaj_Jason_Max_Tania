@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import express, { Router, Request, Response } from 'express';
+import cors from 'cors';
 import swaggerDocs from './swagger';
 import { router as hub } from "./routes/routes";
 
@@ -8,6 +9,10 @@ const keys = { port: process.env.PORT };
 
 const app = express();
 const router = Router();
+
+app.use(cors({
+	origin: 'http://localhost:5173',
+}));
 
 swaggerDocs(app);
 

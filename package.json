@@ -36,12 +36,13 @@
   },
   "dependencies": {
     "@spotify/web-api-ts-sdk": "^1.2.0",
+    "@types/cors": "^2.8.17",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
-    "itty-router": "^5.0.18",
     "openai": "^4.63.0",
-    "spotify-web-api-node": "^5.0.2",
     "prompt-sync": "^4.2.0",
+    "spotify-web-api-node": "^5.0.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }
