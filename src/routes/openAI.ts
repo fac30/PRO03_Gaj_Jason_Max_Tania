@@ -1,6 +1,6 @@
 //h1 IMPORT
 import { NextFunction, Request, Response, Router } from "express";
-import { generateFeatures } from "../controllers/openAI/extractEmotion";
+import { generateFeatures } from "../controllers/openai/extractEmotion";
 import { OpenAIQuery } from '../types/openaiQuery';
 import { OpenAIResponse } from '../types/openaiResponse';
 
