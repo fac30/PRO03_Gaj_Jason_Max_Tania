@@ -2,6 +2,7 @@ import fs from 'fs';
 import OpenAI from "openai";
 import dotenv from 'dotenv';
 import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' assert { type: 'json' };
+import { EmotionEmbedding } from '../../types/embeddingsType';
 
 dotenv.config();
 
@@ -9,12 +10,6 @@ dotenv.config();
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-
-interface EmotionEmbedding {
-  name: string;
-  spotify_features: any;  
-  embedding: any;
-}
 
 // Function to get embeddings for any given text using OpenAI's embeddings API
 export async function getEmbeddingForText(text: string): Promise<number[]> {
