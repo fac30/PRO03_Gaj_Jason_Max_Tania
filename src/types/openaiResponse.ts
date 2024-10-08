@@ -11,3 +11,8 @@ export interface OpenAIResponse {
     genre: string,
     spotifyFeatures: SpotifyFeatures
 };
+
+export interface Emotion {
+  name: string;
+  spotify_features: SpotifyFeatures;
+}
