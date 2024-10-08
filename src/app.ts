@@ -1,11 +1,11 @@
-import * as dotenv from 'dotenv';
+import { PORT } from './config'
 import express, { Router, Request, Response } from 'express';
 import cors from 'cors';
 import swaggerDocs from './swagger';
 import { router as hub } from "./routes/routes";
 
-dotenv.config();
-const keys = { port: process.env.PORT };
+
+const keys = { port: PORT };
 
 const app = express();
 const router = Router();
