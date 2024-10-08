@@ -76,12 +76,8 @@ async function generatePlaylist(query: SpotifyQuery): Promise<SpotifyResponse> {
     const { genre, date, spotifyFeatures } = query; // Destructuring the query object
 
     // Calculating the start and end dates for the 12-month range prior to the given date
-    const endDate = date;
-    const startDate = date;
-    startDate.setFullYear(startDate.getFullYear() - 1); // Subtracting one year to get the start date
-
-    const startYear = startDate.getFullYear();
-    const endYear = endDate.getFullYear();
+    const startYear = date.getFullYear() - 1;
+    const endYear = date.getFullYear();
 
     // Creating the search query string to include genre and year range
     const searchQuery = `genre:${genre} year:${startYear}-${endYear}`;
