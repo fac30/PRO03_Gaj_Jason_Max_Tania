@@ -1,16 +1,14 @@
 import OpenAI from "openai";
-import dotenv from 'dotenv';
+import { OPENAI_API_KEY } from '../../config';
 import { getEmbeddingForText } from '../../controllers/openai/getEmbeddings';
 import precomputedEmbeddings from '../../data/schema/precomputedEmbeddings.json' assert { type: 'json' };
 import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' assert { type: 'json' };
 import { OpenAIQuery } from "../../types/openaiQuery.js";
 import { OpenAIResponse, Emotion } from "../../types/openaiResponse.js"
 
-dotenv.config();
-
 // Initialize OpenAI with your API key from the environment variables
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: OPENAI_API_KEY,
 });
 
 // Example user input
