@@ -1,14 +1,12 @@
 import fs from 'fs';
 import OpenAI from "openai";
-import dotenv from 'dotenv';
+import { OPENAI_API_KEY } from '../../config';
 import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' assert { type: 'json' };
 import { EmotionEmbedding } from '../../types/embeddingsType';
 
-dotenv.config();
-
 // Initialize OpenAI with your API key from the environment variables
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: OPENAI_API_KEY,
 });
 
 // Function to get embeddings for any given text using OpenAI's embeddings API
