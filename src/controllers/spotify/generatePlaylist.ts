@@ -1,10 +1,9 @@
 import SpotifyWebApi from "spotify-web-api-node";
-import * as dotenv from "dotenv";
+import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '../../config';
+
 import { SpotifyResponse, Track } from "../../types/spotifyResponse";
 import { SpotifyQuery } from "../../types/spotifyQuery";
 import {SpotifyFeatures } from "../../types/openaiResponse";
-
-dotenv.config();
 
 /*General explanation
   This script builds upon the original index.ts that searches for tracks based on genre.
@@ -29,8 +28,8 @@ dotenv.config();
 */
 
 // Accessing the client ID and secret from the .env file
-const clientId = process.env.SPOTIFY_CLIENT_ID!;
-const clientSecret = process.env.SPOTIFY_CLIENT_SECRET!;
+const clientId = SPOTIFY_CLIENT_ID!;
+const clientSecret = SPOTIFY_CLIENT_SECRET!;
 
 // Initializing the Spotify API client with your credentials
 const spotifyApi = new SpotifyWebApi({
