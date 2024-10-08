@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import dotenv from 'dotenv';
-import { getEmbeddingForText } from '../../controllers/openAI/getEmbeddings';
+import { getEmbeddingForText } from '../../controllers/openai/getEmbeddings';
 import precomputedEmbeddings from '../../data/schema/precomputedEmbeddings.json' assert { type: 'json' };
 import emotionsToAttributes from '../../data/schema/emotionsToAttributes.json' assert { type: 'json' };
 import { OpenAIQuery } from "../../types/openaiQuery.js";
