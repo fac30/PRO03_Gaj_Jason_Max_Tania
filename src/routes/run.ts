@@ -2,7 +2,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { collateData } from "../controllers/collateData";
 // import { getUserInput } from "../controllers/userInput";
-import { generateFeatures } from '../controllers/openAI/extractEmotion';
+import { generateFeatures } from '../controllers/openai/extractEmotion';
 import { generatePlaylist } from '../controllers/spotify/generatePlaylist';
 import { OpenAIQuery } from '../types/openaiQuery';
 import { OpenAIResponse } from '../types/openaiResponse';
