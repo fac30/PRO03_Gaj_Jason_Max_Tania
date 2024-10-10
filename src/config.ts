@@ -4,7 +4,6 @@ import {
   GetSecretValueCommand,
 } from '@aws-sdk/client-secrets-manager';
 
-// Load environment variables from .env file, if it exists
 dotenvConfig();
 
 const requiredEnvVars = [
@@ -16,7 +15,6 @@ const requiredEnvVars = [
 const missingEnvVars = requiredEnvVars.filter((key) => !process.env[key]);
 
 if (missingEnvVars.length > 0) {
-  // Missing environment variables, retrieve them from AWS Secrets Manager
   const secret_name = 'moodtimesecrets';
   const client = new SecretsManagerClient({
     region: 'eu-west-2',
@@ -28,7 +26,7 @@ if (missingEnvVars.length > 0) {
     response = await client.send(
       new GetSecretValueCommand({
         SecretId: secret_name,
-        VersionStage: 'AWSCURRENT', // VersionStage defaults to AWSCURRENT if unspecified
+        VersionStage: 'AWSCURRENT',
       })
     );
   } catch (error) {
@@ -41,7 +39,6 @@ if (missingEnvVars.length > 0) {
   if (secretString) {
     const secrets = JSON.parse(secretString);
 
-    // Set the missing environment variables
     process.env.OPENAI_API_KEY = process.env.OPENAI_API_KEY || secrets.OPENAI_API_KEY;
     process.env.SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || secrets.SPOTIFY_CLIENT_ID;
     process.env.SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || secrets.SPOTIFY_CLIENT_SECRET;
@@ -51,7 +48,6 @@ if (missingEnvVars.length > 0) {
   }
 }
 
-// Export the secrets for use in your app
 export const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 export const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 export const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
