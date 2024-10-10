@@ -11,7 +11,7 @@ const app = express();
 const router = Router();
 
 app.use(cors({
-	origin: 'http://localhost:5173',
+	origin: 'http://35.178.184.58:80'
 }));
 
 swaggerDocs(app);
