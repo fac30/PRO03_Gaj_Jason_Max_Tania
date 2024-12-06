@@ -34,6 +34,7 @@ async function generatePlaylist(query: SpotifyQuery): Promise<SpotifyResponse> {
     await getAccessToken(); // Ensure a valid access token
 
     const { genre, date, playlistCount } = query; // Destructure the query object
+    console.log(query);
 
     // Calculate the date range (1 year before the given date)
     const startYear = date.getFullYear() - 1;
