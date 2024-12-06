@@ -4,7 +4,7 @@ import cors from "cors";
 import swaggerDocs from "./swagger";
 import { router as hub } from "./routes/routes";
 
-const keys = { port: PORT || 3000 };
+const keys = { port: 3000 };
 
 const app = express();
 const router = Router();
