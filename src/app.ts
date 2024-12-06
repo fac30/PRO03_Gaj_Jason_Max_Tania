@@ -9,9 +9,20 @@ const keys = { port: PORT || 3000 };
 const app = express();
 const router = Router();
 
+const allowedOrigins = [
+  "http://moodtimebucket.s3-website.eu-west-2.amazonaws.com",
+  "http://moodtime.s3-website.eu-west-2.amazonaws.com",
+];
+
 app.use(
   cors({
-    origin: "http://moodtimebucket.s3-website.eu-west-2.amazonaws.com",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   }),
 );
 
