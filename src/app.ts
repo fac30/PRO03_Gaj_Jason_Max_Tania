@@ -11,7 +11,7 @@ const app = express();
 const router = Router();
 
 app.use(cors({
-	origin: 'http://moodtimebucket.s3-website.eu-west-2.amazonaws.com/'
+	origin: 'http://moodtimebucket.s3-website.eu-west-2.amazonaws.com'
 }));
 
 swaggerDocs(app);
